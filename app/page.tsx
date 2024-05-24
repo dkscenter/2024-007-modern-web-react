@@ -16,17 +16,19 @@ const App: React.FC = () => {
   ];
 
   return (
-    <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '20px', marginTop: '50px' }}>
-      {products.map((product, index) => (
-        <ProductBox
-          key={index}
-          name={product.name}
-          price={product.price}
-          description={product.description}
-          imageUrl={product.imageUrl}
-        />
-      ))}
-    </div>
+    <>
+      <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '20px', marginTop: '50px' }}>
+        {products.map((product, index) => (
+          <ProductBox
+            key={index}
+            name={product.name}
+            price={product.price}
+            description={product.description}
+            imageUrl={product.imageUrl}
+          />
+        ))}
+      </div>
+    </>
   );
 };
 
