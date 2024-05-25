@@ -1,18 +1,31 @@
 "use client"
 import React from 'react';
 import { ProducBoxProps } from '@/types/product';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { ArrowLeftIcon, ArrowRightIcon } from '@heroicons/react/24/solid';
 
 
 const ProductBox: React.FC<ProducBoxProps> = ({ products }) => {
-  const [index,setIndex] = useState(Math.floor(Math.random() * 10))
+  const [isLoading, setLoading] = useState(true)
+  const [index,setIndex] = useState(0)
   const nextHandler = (nextIndex: number)=>{
     setIndex(nextIndex > products.length-1 ? 0 : nextIndex)
   }
   const backHandler = (backIndex: number)=>{
     setIndex(backIndex < 0 ? products.length-1 : backIndex)
   }
+
+  useEffect(()=>{
+    setIndex(Math.floor(Math.random() * 10))
+    setLoading(false)
+  },[])
+
+  if(isLoading) return (
+    <div className="flex justify-center items-center h-screen">
+      <div className="w-16 h-16 border-t-4 border-b-4 border-indigo-500 rounded-full animate-spin"></div>
+    </div>
+  )
+
   return (
     <div className="border border-gray-300 p-4 rounded-lg text-center w-72 h-96 shadow-md m-3 flex flex-col items-center justify-center">
       <div className="flex items-center justify-center mb-4">

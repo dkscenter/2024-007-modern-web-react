@@ -1,6 +1,5 @@
 import React from 'react';
 import ProductBox from '@/components/ProductBox';
-import { Product } from '@/types/product';
 import products from '@/data/products.json'
 
 const App: React.FC = () => {
