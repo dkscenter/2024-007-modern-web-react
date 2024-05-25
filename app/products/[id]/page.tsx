@@ -30,7 +30,7 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ params }) => {
       </h1>
       <div className="relative flex w-full items-center overflow-hidden bg-white px-4 pb-8 pt-14 shadow-2xl sm:px-6 sm:pt-8 md:p-6 lg:p-8">
         <div className="grid w-full grid-cols-1 items-start gap-x-6 gap-y-8 sm:grid-cols-12 lg:gap-x-8">
-          <div className="aspect-h-3 aspect-w-2 overflow-hidden rounded-lg bg-gray-100 sm:col-span-4 lg:col-span-5">
+          <div className="aspect-h-2 aspect-w-3 overflow-hidden rounded-lg bg-gray-100 sm:col-span-4 lg:col-span-5">
             <img src={product.imageUrl} alt={product.name} className="object-cover object-center" />
           </div>
           <div className="sm:col-span-8 lg:col-span-7">
