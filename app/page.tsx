@@ -1,9 +1,10 @@
-"use client"
 import React from 'react';
 import ProductBox from '@/components/ProductBox';
+import { Product } from '@/types/product';
 
 const App: React.FC = () => {
-  const products = [
+
+  const products: Product[] = [
     { name: "Whiskers", price: 150, description: "A playful and friendly cat.", imageUrl: "/products/01.jpg" },
     { name: "Mittens", price: 120, description: "Loves to cuddle and nap.", imageUrl: "/products/02.jpg" },
     { name: "Shadow", price: 200, description: "A quiet and mysterious cat.", imageUrl: "/products/03.jpg" },
@@ -26,17 +27,20 @@ const App: React.FC = () => {
         marginTop: '50px',
         marginBottom: '50px'
       }}>
-        <div style={{ textAlign: "center" }}>
+        
           <ProductBox
-            name={products[0].name}
-            price={products[0].price}
-            description={products[0].description}
-            imageUrl={products[0].imageUrl}
+            products={products}
           />
-          <a href="#" onClick={() => console.log("Hello")} className="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
-            Next
-          </a>
-        </div>
+          <ProductBox
+            products={products}
+          />
+          <ProductBox
+            products={products}
+          />
+          <ProductBox
+            products={products}
+          />
+     
       </div>
     </>
   );

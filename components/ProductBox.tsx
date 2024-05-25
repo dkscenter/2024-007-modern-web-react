@@ -1,52 +1,43 @@
+"use client"
 import React from 'react';
+import { ProducBoxProps } from '@/types/product';
+import { useState } from 'react';
+import { ArrowLeftIcon, ArrowRightIcon } from '@heroicons/react/24/solid';
 
-interface ProductProps {
-  name: string;
-  price: number;
-  description: string;
-  imageUrl: string;
-}
 
-const ProductBox: React.FC<ProductProps> = ({ name, price, description, imageUrl }) => {
+const ProductBox: React.FC<ProducBoxProps> = ({ products }) => {
+  const [index,setIndex] = useState(Math.floor(Math.random() * 10))
+  const nextHandler = (nextIndex: number)=>{
+    setIndex(nextIndex > products.length-1 ? 0 : nextIndex)
+  }
+  const backHandler = (backIndex: number)=>{
+    setIndex(backIndex < 0 ? products.length-1 : backIndex)
+  }
   return (
-    <div style={styles.container}>
-      <img src={imageUrl} alt={name} style={styles.image} />
-      <h2 style={styles.name}>{name}</h2>
-      <p style={styles.price}>${price.toFixed(2)}</p>
-      <p style={styles.description}>{description}</p>
+    <div className="border border-gray-300 p-4 rounded-lg text-center w-72 h-96 shadow-md m-3 flex flex-col items-center justify-center">
+      <div className="flex items-center justify-center mb-4">
+        <img src={products[index].imageUrl} alt={products[index].name} className="w-24 h-24 rounded-full object-cover" />
+      </div>
+      <h2 className="text-xl mb-2">{products[index].name}</h2>
+      <p className="text-lg text-gray-600 mb-2">${products[index].price.toFixed(2)}</p>
+      <p className="text-base text-gray-500 mb-4">{products[index].description}</p>
+      <div className="flex space-x-4">
+        <button
+          onClick={() => backHandler(index - 1)}
+          className="flex items-center justify-center w-10 h-10 rounded-full bg-indigo-600 text-white shadow-sm hover:bg-indigo-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-600"
+        >
+          <ArrowLeftIcon className="h-5 w-5" />
+        </button>
+        <button
+          onClick={() => nextHandler(index + 1)}
+          className="flex items-center justify-center w-10 h-10 rounded-full bg-indigo-600 text-white shadow-sm hover:bg-indigo-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-600"
+        >
+          <ArrowRightIcon className="h-5 w-5" />
+        </button>
+      </div>
     </div>
   );
 };
 
-const styles = {
-  container: {
-    border: '1px solid #ddd',
-    padding: '16px',
-    borderRadius: '8px',
-    textAlign: 'center' as 'center',
-    width: '200px',
-    boxShadow: '0 2px 5px rgba(0,0,0,0.1)',
-    margin: '10px'
-  },
-  image: {
-    width: '100px',
-    height: '100px',
-    borderRadius: '50%',
-    objectFit: 'cover' as 'cover',
-    marginBottom: '16px'
-  },
-  name: {
-    fontSize: '1.5em',
-    margin: '8px 0'
-  },
-  price: {
-    fontSize: '1.2em',
-    color: '#888'
-  },
-  description: {
-    fontSize: '1em',
-    color: '#555'
-  }
-};
 
 export default ProductBox;
