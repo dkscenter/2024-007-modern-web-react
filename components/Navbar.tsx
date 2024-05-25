@@ -13,7 +13,7 @@ import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
 
 const navigation = [
   { name: 'Home', href: '/', current: true },
-  { name: 'Product', href: '#', current: false },
+  { name: 'Products', href: '/products', current: false },
 ]
 
 function classNames(...classes: (string | false | null | undefined)[]): string {
