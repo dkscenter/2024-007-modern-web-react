@@ -8,3 +8,4 @@ export interface Product {
 export interface ProducBoxProps {
     products: Product[]
 }
+
