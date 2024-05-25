@@ -10,6 +10,8 @@ import {
   Transition,
 } from '@headlessui/react'
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
+import { usePathname } from 'next/navigation'
+import Link from 'next/link';
 
 const navigation = [
   { name: 'Home', href: '/', current: true },
@@ -17,10 +19,13 @@ const navigation = [
 ]
 
 function classNames(...classes: (string | false | null | undefined)[]): string {
-    return classes.filter(Boolean).join(' ');
-  }
+  return classes.filter(Boolean).join(' ');
+}
 
 export default function Navbar() {
+  const pathname = usePathname();
+  console.log("pathname", pathname);
+
   return (
     <Disclosure as="nav" className="bg-gray-800">
       {({ open }) => (
@@ -50,17 +55,14 @@ export default function Navbar() {
                 <div className="hidden sm:ml-6 sm:block">
                   <div className="flex space-x-4">
                     {navigation.map((item) => (
-                      <a
-                        key={item.name}
+                      <Link key={item.name}
                         href={item.href}
                         className={classNames(
-                          item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
+                          pathname === item.href ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
                           'rounded-md px-3 py-2 text-sm font-medium'
                         )}
-                        aria-current={item.current ? 'page' : undefined}
-                      >
-                        {item.name}
-                      </a>
+                        aria-current={pathname === item.href ? 'page' : undefined}>{item.name}</Link>
+
                     ))}
                   </div>
                 </div>
