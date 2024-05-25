@@ -4,6 +4,7 @@ import products from '@/data/products.json'
 import ProductDetail from '@/components/ProductDetail';
 import { useState } from 'react';
 import SearchBox from '@/components/SearchBox';
+import Link from 'next/link';
 
 const Product: React.FC = () => {
   const [searchText, setSearchText] = useState("")
@@ -20,7 +21,9 @@ const Product: React.FC = () => {
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {filteredProducts.map((product, index) => (
-          <ProductDetail key={index} product={product} />
+          <Link key={index} href={`/products/${index}`}>
+          <ProductDetail  product={product} />
+          </Link>
         ))}
       </div>
     </div>
