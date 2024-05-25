@@ -1,3 +1,4 @@
+"use client"
 import React from 'react';
 import ProductBox from '@/components/ProductBox';
 
@@ -17,16 +18,25 @@ const App: React.FC = () => {
 
   return (
     <>
-      <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '20px', marginTop: '50px' }}>
-        {products.map((product, index) => (
+      <div style={{
+        display: 'flex',
+        flexWrap: 'wrap',
+        justifyContent: 'center',
+        gap: '20px',
+        marginTop: '50px',
+        marginBottom: '50px'
+      }}>
+        <div style={{ textAlign: "center" }}>
           <ProductBox
-            key={index}
-            name={product.name}
-            price={product.price}
-            description={product.description}
-            imageUrl={product.imageUrl}
+            name={products[0].name}
+            price={products[0].price}
+            description={products[0].description}
+            imageUrl={products[0].imageUrl}
           />
-        ))}
+          <a href="#" onClick={() => console.log("Hello")} className="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+            Next
+          </a>
+        </div>
       </div>
     </>
   );
