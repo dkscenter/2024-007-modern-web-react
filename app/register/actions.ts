@@ -14,18 +14,16 @@ export async function register(prevState: any, formData: FormData) {
     email: formData.get('email'),
   }
 
-  const config = {
-    method: 'post',
-    maxBodyLength: Infinity,
-    url: 'https://89534e29-0fce-4172-a8ff-cf55054fd53f.mock.pstmn.io/register',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    data: JSON.stringify(rawFormData),
-  };
-
   try {
-    const response = await axios.request(config);
+    const response = await axios.request({
+      method: 'post',
+      maxBodyLength: Infinity,
+      url: 'https://89534e29-0fce-4172-a8ff-cf55054fd53f.mock.pstmn.io/register',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      data: JSON.stringify(rawFormData),
+    });
     return response.data;
   } catch (error: any) {
     return error.response.data
