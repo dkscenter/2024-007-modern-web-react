@@ -25,7 +25,7 @@ export default function Signup() {
 
       <div className="mb-4">
         <label htmlFor="username" className="block text-gray-700 text-sm font-bold mb-2">Username</label>
-        <input type="text" id="username" name="username" className="mt-1 p-2 w-full border rounded-md" />
+        <input value={state.rawFormData.username} type="text" id="username" name="username" className="mt-1 p-2 w-full border rounded-md" />
       </div>
       <div className="mb-4">
         <label htmlFor="password" className="block text-gray-700 text-sm font-bold mb-2">Password</label>

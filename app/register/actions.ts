@@ -24,8 +24,14 @@ export async function register(prevState: any, formData: FormData) {
       },
       data: JSON.stringify(rawFormData),
     });
-    return response.data;
+    return {
+      ...response.data,
+      rawFormData
+    };
   } catch (error: any) {
-    return error.response.data
+    return {
+      ...error.response.data,
+      rawFormData
+    };
   }
 }
