@@ -89,10 +89,30 @@ export const authOptions: NextAuthConfig = {
     }),
   ],
   callbacks: {
+    async jwt({ token, user }) {
+      if (user) {
+        token = {
+          ...token,
+          ...user,
+        }
+      }
+      return token;
+    },
+    async session({ session, token }:{session: any, token: JWT}) {
+      return {
+        ...session,
+        accessToken: token.accessToken,
+        user: {
+          ...session.user,
+          ...token,
+        },
+      };
+    },
   },
   pages: {
     signIn: "/login",
   },
+  secret: process.env.NEXTAUTH_SECRET,
 };
 
 export const { handlers, signIn, signOut, auth } = NextAuth(authOptions);

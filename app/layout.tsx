@@ -3,6 +3,8 @@ import { Inter } from "next/font/google";
 import Navbar from "@/components/Navbar"
 import Footer from "@/components/Footer"
 import "./globals.css";
+import { SessionProvider } from "next-auth/react";
+import { ProfileProvider } from "@/context/ProfileContext";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -23,13 +25,17 @@ export default function RootLayout({
         <script src="http://192.168.1.48:8097"></script>
       </head>
       <body className={inter.className}>
-        <>
-          <Navbar />
-          <div className="bg-gray-100">
-            {children}
-          </div>
-          <Footer />
-        </>
+        <SessionProvider>
+          <ProfileProvider>
+            <>
+              <Navbar />
+              <div className="bg-gray-100">
+                {children}
+              </div>
+              <Footer />
+            </>
+          </ProfileProvider>
+        </SessionProvider>
       </body>
     </html>
   );
