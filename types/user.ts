@@ -1,8 +1,24 @@
-
 export interface RegisterData {
-  username: FormDataEntryValue | null;
-  password: FormDataEntryValue | null;
-  firstname: FormDataEntryValue | null;
-  lastname: FormDataEntryValue | null;
-  email: FormDataEntryValue | null;
+  username: string;
+  password: string;
+  firstname: string;
+  lastname: string;
+  nickname: string;
+  email: string;
+  image: string;
+  bio: {
+    about: string;
+    skills: string[];
+    experience: {
+      company: string;
+      role: string;
+      duration: string;
+      projects: { name: string; description: string }[];
+    }[];
+    contact_information: {
+      email: string;
+      phone: string;
+      linkedin: string;
+    };
+  };
 }
