@@ -13,6 +13,9 @@ import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 
+import { signOut, useSession } from "next-auth/react"
+import { useProfile } from '@/context/ProfileContext';
+
 const navigation = [
   { name: 'Home', href: '/', current: true },
   { name: 'Products', href: '/products', current: false },
@@ -23,6 +26,10 @@ function classNames(...classes: (string | false | null | undefined)[]): string {
 }
 
 const Navbar = () => {
+
+  let session: any = useSession();
+  const { setProfile } = useProfile();
+
   const pathname = usePathname();
   return (
     <Disclosure as="nav" className="bg-gray-800">
@@ -70,24 +77,40 @@ const Navbar = () => {
               </div>
               <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
 
-                <Link
-                  href={"/register"}
-                  className={classNames(
-                    pathname === '/register' ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
-                    'rounded-md px-3 py-2 text-sm font-medium'
-                  )}
-                  aria-current={pathname === '/register' ? 'page' : undefined}>
-                  Register
-                </Link>
-                <Link
-                  href={"/login"}
-                  className={classNames(
-                    pathname === '/login' ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
-                    'rounded-md px-3 py-2 text-sm font-medium'
-                  )}
-                  aria-current={pathname === '/login' ? 'page' : undefined}>
-                  Login
-                </Link>
+              {
+                  (session?.data?.user) ? (
+                    <button
+                      className="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"
+                      onClick={() => {
+                        signOut({ callbackUrl: '/' }),
+                          setProfile(null);
+                      }}
+                    >
+                      Signout
+                    </button>
+                  ) : (
+                    <>
+                      <Link
+                        href={"/register"}
+                        className={classNames(
+                          pathname === '/register' ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
+                          'rounded-md px-3 py-2 text-sm font-medium'
+                        )}
+                        aria-current={pathname === '/register' ? 'page' : undefined}>
+                        Register
+                      </Link>
+                      <Link
+                        href={"/login"}
+                        className={classNames(
+                          pathname === '/login' ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
+                          'rounded-md px-3 py-2 text-sm font-medium'
+                        )}
+                        aria-current={pathname === '/login' ? 'page' : undefined}>
+                        Login
+                      </Link>
+                    </>
+                  )
+                }
               </div>
             </div>
           </div>
