@@ -1,7 +1,5 @@
 "use server";
-
-import { signIn } from "@/auth";
-import { AuthError } from "next-auth";
+// import { signIn } from "@/auth";
 
 export async function authenticate(prevState: any, formData: FormData) {
     const username = formData.get('username');
@@ -14,18 +12,11 @@ export async function authenticate(prevState: any, formData: FormData) {
     };
 
     try {
-        await signIn("credentials", {
-            redirect: false,
-            username,
-            password
-        });
-
         return {
             ...prevState,
             message: "Login success",
             code: "LOGIN_SUCCESS",
         };
-
     } catch (error: any) {
         return {
             ...prevState,

@@ -1,7 +1,8 @@
 import { Project } from "@/types/profile";
 
 
-const ProfileProjects = ({ projects }: { projects: Project[] }) => {
+const ProfileProjects = ({ projects }: { projects: Project[] | null }) => {
+  if(!projects) return null
   return (
     <div className="mt-4">
       <h4 className="text-lg font-semibold text-gray-900 mt-4">Projects:</h4>
