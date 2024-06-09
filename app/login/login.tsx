@@ -11,6 +11,10 @@ const Login = () => {
   const [state, formAction] = useFormState(authenticate, initialState)
   const { pending } = useFormStatus()
 
+  if (state.code === "LOGIN_SUCCESS") {
+    window.location.href = "/profile"
+  }
+
   if (pending) {
     return (
       <div className="flex justify-center items-center h-screen">
@@ -23,11 +27,6 @@ const Login = () => {
     <form action={formAction}>
       {state.code === "LOGIN_ERROR" && (
         <div className={`mb-4 text-center px-4 py-2 rounded bg-red-100 text-red-700`}>
-          {state.message}
-        </div>
-      )}
-      {state.code === "LOGIN_SUCCESS" && (
-        <div className={`bg-green-100 text-green-700 mb-4 text-center px-4 py-2 rounded`}>
           {state.message}
         </div>
       )}

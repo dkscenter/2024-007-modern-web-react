@@ -1,8 +1,8 @@
 // auth.ts
 import NextAuth, { NextAuthConfig, DefaultSession, Session, User } from "next-auth";
-// import CredentialsProvider from "next-auth/providers/credentials";
-// import axios from 'axios';
-// import { JWT } from "next-auth/jwt";
+import CredentialsProvider from "next-auth/providers/credentials";
+import axios from 'axios';
+import { JWT } from "next-auth/jwt";
 
 declare module "next-auth" {
   interface Session {
@@ -63,6 +63,30 @@ declare module "next-auth" {
 
 export const authOptions: NextAuthConfig = {
   providers: [
+    CredentialsProvider({
+      name: 'Credentials',
+      credentials: {
+        username: { label: "Username", type: "text" },
+        password: { label: "Password", type: "password" }
+      },
+      async authorize(credentials) {
+        try {
+          const response = await axios.post('https://89534e29-0fce-4172-a8ff-cf55054fd53f.mock.pstmn.io/login', {
+            username: credentials?.username,
+            password: credentials?.password,
+          });
+
+          const user = response.data.user;
+
+          if (response.data.code === "LOGIN_SUCCESS") return user;
+          
+          return null;
+        } catch (error) {
+          console.error(error);
+          return null;
+        }
+      }
+    }),
   ],
   callbacks: {
   },
